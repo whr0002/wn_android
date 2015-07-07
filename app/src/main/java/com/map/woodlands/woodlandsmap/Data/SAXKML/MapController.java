@@ -144,7 +144,7 @@ public class MapController {
                     m = map.addMarker(mo);
                 }else{
 //                    mo.title("raw");
-                    mo.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_blue));
+                    mo.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_purple));
                     m = map.addMarker(mo);
                 }
 

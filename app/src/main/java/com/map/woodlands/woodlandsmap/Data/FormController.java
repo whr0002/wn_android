@@ -11,7 +11,7 @@ import com.map.woodlands.woodlandsmap.Fragments.FormFragment;
 
 import java.io.File;
 import java.lang.reflect.Type;
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -264,10 +264,10 @@ public class FormController {
 
     public void addTestData(){
         ArrayList<Form> forms = new ArrayList<Form>();
-        for(int i=0;i<2;i++){
+        for(int i=0;i<1;i++){
             Form f = new Form();
             f.ID = i;
-            f.INSP_DATE = "5/23/2015";
+            f.INSP_DATE = "5/25/2015";
             f.INSP_CREW = "Tester";
             f.ACCESS = "ATV";
             f.CROSS_NM = "CROSS_1_5";
@@ -284,7 +284,7 @@ public class FormController {
             f.BLOCKAGE = "No";
             f.EMG_REP_RE = "No";
             f.STU_PROBS = "No";
-            f.STATUS = "Ready to summit";
+            f.STATUS = "Ready to submit";
 //            f.PHOTO_INUP = "/storage/emulated/0/Android/data/com.map.woodlands.woodlandsmap/files/Pictures/picupload/JPEG_20150504_094731.jpg";
 //            f.PHOTO_INDW = "/storage/emulated/0/Android/data/com.map.woodlands.woodlandsmap/files/Pictures/picupload/JPEG_20150504_094731.jpg";
 //            f.PHOTO_OTUP = "/storage/emulated/0/Android/data/com.map.woodlands.woodlandsmap/files/Pictures/picupload/JPEG_20150504_094731.jpg";
@@ -310,7 +310,7 @@ public class FormController {
             f.CULV_SUBSPROPORTION3 = "51 - 75";
 
             f.Client = "APACHE";
-            f.timestamp = DateFormat.getTimeInstance().format(new Date())+i;
+            f.timestamp = new SimpleDateFormat("HH:mm:ss").format(new Date());
 
             f.ChannelCreekDepthLeft = "50";
             f.ChannelCreekDepthRight = "60";

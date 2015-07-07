@@ -10,7 +10,6 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 /**
  * Created by Jimmy on 3/16/2015.
@@ -62,18 +61,9 @@ public class ImageProcessor {
             bmOptions.inSampleSize = 4;
             Bitmap b = BitmapFactory.decodeFile(mPath, bmOptions);
             compressImage(b);
+            setGeoTag(mPath, mLatLng);
 
-            if(mLatLng != null){
-                if(mPath != null) {
-                    setGeoTag(mPath, mLatLng);
-                }
-            }
         }
-
-
-
-
-
 
     }
 
@@ -108,7 +98,6 @@ public class ImageProcessor {
     }
 
     public boolean setGeoTag(String path, LatLng geoTag) {
-        if (geoTag != null) {
             try {
                 ExifInterface exif = new ExifInterface(path);
 
@@ -143,13 +132,12 @@ public class ImageProcessor {
 
                 exif.saveAttributes();
 
-            } catch (IOException e) {
-//                e.printStackTrace();
-                return false;
+                return true;
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } else {
-            return false;
-        }
-        return true;
+
+        return false;
     }
 }

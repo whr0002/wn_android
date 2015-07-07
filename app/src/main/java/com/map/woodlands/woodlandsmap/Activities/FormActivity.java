@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -51,7 +52,6 @@ import org.json.JSONArray;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -119,6 +119,8 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
             culvertDiameter2Block, culvertDiameter3Block, fishReasonBlock, clientBlock ;
 
     public ImageButton attachmentButton, cancelAttachmentButton;
+    private boolean isLocationOK = false;
+    private boolean isShowLocationWarning = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -436,8 +438,9 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
 
 
         // Get timestamp
-//        formCreatedTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
-        formCreatedTime = DateFormat.getTimeInstance().format(new Date());
+        formCreatedTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
+//        formCreatedTime = DateFormat.getTimeInstance().format(new Date());
+
     }
 
     @Override
@@ -476,12 +479,17 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
 
             case R.id.save:
                 // Save form
-                Form form = generateForm();
-                validateForms(form);
+                if(!isLocationOK && isShowLocationWarning){
+                    showAccuracyMessage();
+                    isShowLocationWarning = false;
+                }else {
 
-                mFormController.saveForm(form);
-                finish();
+                    Form form = generateForm();
+                    validateForms(form);
 
+                    mFormController.saveForm(form);
+                    finish();
+                }
                 return true;
 
 
@@ -623,7 +631,7 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
                     double d2 = Double.parseDouble(s2);
                     double total = (d1 + d2)/factor;
                     return Double.toString(total);
-
+//
                 }else if(s1.matches("-?\\d+(\\.\\d+)?")){
                     double d = Double.parseDouble(s1);
                     d = d/factor;
@@ -1007,9 +1015,26 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
 
     @Override
     public void onLocationChanged(Location location) {
-        latitudeView.setText(""+location.getLatitude());
-        longitudeView.setText(""+location.getLongitude());
-        this.location = location;
+        float accuracy = location.getAccuracy();
+
+//        Log.i("debug", ""+accuracy);
+
+        if(accuracy <= 10) {
+            latitudeView.setTextColor(Color.BLUE);
+            longitudeView.setTextColor(Color.BLUE);
+            latitudeView.setText("" + location.getLatitude());
+            longitudeView.setText("" + location.getLongitude());
+            mGoogleApiClient.disconnect();
+            isLocationOK = true;
+        }else{
+            latitudeView.setTextColor(Color.RED);
+            longitudeView.setTextColor(Color.RED);
+            latitudeView.setText("" + location.getLatitude());
+            longitudeView.setText("" + location.getLongitude());
+        }
+        if(location != null) {
+            this.location = new Location(location);
+        }
     }
 
     @Override
@@ -1052,5 +1077,21 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
 //        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
 //            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
 //        }
+    }
+
+    public void showAccuracyMessage(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Warning");
+        builder.setMessage("The accuracy of your current location is low.");
+
+
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.show();
     }
 }
