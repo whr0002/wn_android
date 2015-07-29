@@ -91,11 +91,13 @@ public class FormFragment  extends Fragment{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 Form theForm = adapter.getItem(position);
 //                Log.i("debug","Form ID: "+theForm.ID);
 
                 Intent intent = new Intent(aba, EditFormActivity.class);
                 intent.putExtra("ID", theForm.ID);
+
 
 
                 startActivityForResult(intent, 0);
@@ -122,9 +124,12 @@ public class FormFragment  extends Fragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case 0:
+
+//                ProgressDialog progressDialog = ProgressDialog.show(aba, "", "Loading ...", true);
                 // Create a new form, go to form detail activity
                 Intent intent = new Intent(aba, FormActivity.class);
 //                startActivity(intent);
+                Bundle bundle = new Bundle();
                 startActivityForResult(intent, 0);
 
                 return true;

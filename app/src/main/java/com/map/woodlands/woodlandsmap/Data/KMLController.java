@@ -51,7 +51,7 @@ public class KMLController {
     public KMLController(MapController mapController, Context context){
         this.mapController = mapController;
         this.mContext = context;
-        this.client = new AsyncHttpClient();
+        this.client = new AsyncHttpClient(true, 80, 443);
     }
 
     // Unzip KMZ, return KML in bytes

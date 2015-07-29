@@ -3,6 +3,7 @@ package com.map.woodlands.woodlandsmap.Data;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.map.woodlands.woodlandsmap.R;
 
@@ -21,6 +22,9 @@ public class ViewToggler {
     private LinearLayout culvertD2Block;
     private LinearLayout culvertD3Block;
     private LinearLayout fishReasonBlock;
+    private LinearLayout scourBlock;
+    private LinearLayout outletBlock;
+
     private View loadingView;
 
     public ViewToggler(AdapterView<?> parent, int position, LinearLayout... blocks){
@@ -35,6 +39,8 @@ public class ViewToggler {
             this.culvertD2Block = blocks[5];
             this.culvertD3Block = blocks[6];
             this.fishReasonBlock = blocks[7];
+            this.scourBlock = blocks[8];
+            this.outletBlock = blocks[9];
 
         }
     }
@@ -73,6 +79,14 @@ public class ViewToggler {
             case R.id.erosionDropdown:
                 if(s.equals("yes") || s.equals("potential")){
                     erosionBlock.setVisibility(View.VISIBLE);
+                    LinearLayout sourceLayout = (LinearLayout)erosionBlock.getChildAt(1);
+                    TextView starView = (TextView) sourceLayout.getChildAt(1);
+                    if(s.equals("yes")){
+                        starView.setText("*");
+                    }else if(s.equals("potential")){
+                        starView.setText("");
+                    }
+
                 }else{
                     erosionBlock.setVisibility(View.GONE);
                 }
@@ -99,6 +113,22 @@ public class ViewToggler {
                     fishReasonBlock.setVisibility(View.GONE);
                 }else{
                     fishReasonBlock.setVisibility(View.VISIBLE);
+                }
+                break;
+
+            case R.id.scourPoolPresentDropdown:
+                if(s.equals("yes")){
+                    scourBlock.setVisibility(View.VISIBLE);
+                }else{
+                    scourBlock.setVisibility(View.GONE);
+                }
+                break;
+
+            case R.id.culvertOutletTypeDropdown:
+                if(s.equals("hanging")){
+                    outletBlock.setVisibility(View.VISIBLE);
+                }else{
+                    outletBlock.setVisibility(View.GONE);
                 }
                 break;
         }

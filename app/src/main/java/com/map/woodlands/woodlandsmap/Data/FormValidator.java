@@ -32,7 +32,9 @@ public class FormValidator {
                 messages.add("Inspection Crew must contain letters only");
             }
 
-            if(mForm.ACCESS.length() > 10){
+            if(mForm.ACCESS.length() == 0){
+                messages.add("Access is required");
+            }else if(mForm.ACCESS.length() > 10){
                 messages.add(generateLengthMessage("Access", 10));
             }
 
@@ -81,21 +83,47 @@ public class FormValidator {
                 messages.add("Crossing Type is required");
             }else{
                 if(!mForm.CROSS_TYPE.toLowerCase().contains("bridge")){
+
+                    if(mForm.CULV_LEN.length() == 0){
+                        messages.add("Culvert Length is required");
+                    }
+
                     // It's culvert type, make Culvert Diameter 1 required
                     if(mForm.CULV_DIA_1.length() == 0){
                         messages.add("Culvert Diameter 1 is required");
                     }
+
+                    if(mForm.CULV_SUBS.length() == 0){
+                        messages.add("Culvert Substrate is required");
+                    }
+
+                    if(mForm.CULV_SUBSTYPE1.length() == 0 || mForm.CULV_SUBSPROPORTION1.length() == 0){
+                        messages.add("Substrate Primary is required");
+                    }
+
+                    if(mForm.RoadFillAboveCulvert.length() == 0){
+                        messages.add("Road Fill above Culvert is required");
+                    }
+
                 }
             }
 
             if(mForm.EROSION.length() == 0){
                 messages.add("Erosion is required");
             }else{
+
+                if(mForm.EROSION.equals("Yes")){
+                    if(mForm.EROSION_SO.length() == 0){
+                        messages.add("Erosion Source is required");
+                    }
+                }
+
                 if(!mForm.EROSION.contains("No")){
                     // Erosion is Yes or Pot, validate Erosion Type and Degree
                     if(mForm.EROSION_TY1.length() == 0){
                         messages.add("Erosion Type is required");
                     }
+
                     if(mForm.EROSION_DE.length() == 0){
                         messages.add("Erosion Extent is required");
                     }
@@ -148,22 +176,49 @@ public class FormValidator {
                 messages.add(s);
             }
 
-            if(mForm.CULV_OPOOD.length()> 0 && !isNumeric(mForm.CULV_OPOOD)){
-                messages.add(generateNumericMessage("Culvert Pool Depth"));
-            }
-            s = generateRangeMessage("Culvert Pool Depth", mForm.CULV_OPOOD, 0, 1000);
-            if(s != null){
-                messages.add(s);
-            }
+            if(mForm.SCOUR_POOL.length() == 0){
+                messages.add("Scour Pool Present is required");
+            }else{
+                if(mForm.SCOUR_POOL.equals("Yes")){
 
 
-            if(mForm.CULV_OPGAP.length()> 0 && !isNumeric(mForm.CULV_OPGAP)){
-                messages.add(generateNumericMessage("Culvert Outlet Gap"));
-            }
 
-            s = generateRangeMessage("Culvert Outlet Gap", mForm.CULV_OPGAP, 0, 1000);
-            if(s != null){
-                messages.add(s);
+
+                    if(mForm.CULV_OPOOD.length() == 0){
+                        messages.add("Culvert Pool Depth is required");
+                    }else{
+                        if(mForm.CULV_OPOOD.length()> 0 && !isNumeric(mForm.CULV_OPOOD)){
+                            messages.add(generateNumericMessage("Culvert Pool Depth"));
+                        }
+                        s = generateRangeMessage("Culvert Pool Depth", mForm.CULV_OPOOD, 0, 1000);
+                        if(s != null){
+                            messages.add(s);
+                        }
+                    }
+
+                    if(mForm.FirstRiffleDistance.length() == 0){
+                        messages.add("First Riffle Distance is required");
+                    }
+                }
+
+                if(mForm.CULV_OUTLETTYPE.length() == 0){
+                    messages.add("Culvert Outlet Type is required");
+                }else if(mForm.CULV_OUTLETTYPE.equals("Hanging")){
+                    if(mForm.CULV_OPGAP.length() == 0){
+                        messages.add("Culvert Outlet Gap is required");
+                    }else{
+                        if(mForm.CULV_OPGAP.length()> 0 && !isNumeric(mForm.CULV_OPGAP)){
+                            messages.add(generateNumericMessage("Culvert Outlet Gap"));
+                        }
+
+                        s = generateRangeMessage("Culvert Outlet Gap", mForm.CULV_OPGAP, 0, 1000);
+                        if(s != null){
+                            messages.add(s);
+                        }
+                    }
+                }
+
+
             }
 
             if(mForm.BRDG_LEN.length()> 0 && !isNumeric(mForm.BRDG_LEN)){
@@ -176,6 +231,11 @@ public class FormValidator {
 
             if(mForm.FISH_PCONC.length() == 0){
                 messages.add("Fish Passage Concerns is required");
+            }else if(!mForm.FISH_PCONC.equals("No Concerns")){
+
+                if(mForm.FISH_PCONCREASON.length() == 0) {
+                    messages.add("Fish Passage Concerns Reason is required");
+                }
             }
 
             if(mForm.FISH_PCONCREASON.length() > 20){
@@ -184,6 +244,14 @@ public class FormValidator {
 
             if(mForm.BLOCKAGE.length() == 0){
                 messages.add("Blockage is required");
+            }else if(mForm.BLOCKAGE.equals("Yes")){
+                if(mForm.BLOC_MATR.length() == 0){
+                    messages.add("Blockage Material is required");
+                }
+
+                if(mForm.BLOC_CAUS.length() == 0){
+                    messages.add("Blockage Cause is required");
+                }
             }
 
             if(mForm.BLOCKAGE.length() > 50){
@@ -209,6 +277,16 @@ public class FormValidator {
             if(mForm.REMARKS.length() > 200){
                 messages.add(generateLengthMessage("Remarks", 200));
             }
+
+            if(mForm.SEDEMENTAT.length() == 0){
+                messages.add("Sedimentation is required");
+            }
+
+            if(mForm.DELINEATOR.length() == 0){
+                messages.add("Delineator is required");
+            }
+
+
 
         }else{
             messages.add("Form is null");

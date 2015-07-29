@@ -92,7 +92,7 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
 
     public ImageButton dateButton;
 
-    public TextView dateView,latitudeView,longitudeView,attachmentName;
+    public TextView dateView,latitudeView,longitudeView, accuracyView, attachmentName;
 
     public EditText inspectionCrewView,crossingNumberView,crossingIDView,streamIDView,dispositionIDView,
             streamWidthView,erosionAreaView,culvertLengthView,culvertDiameter1View,
@@ -116,7 +116,8 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
     public ImageView photoView1,photoView2,photoView3,photoView4,photoView5,photoView6, photoView7, photoView8;
 
     public LinearLayout culvertBlock,bridgeBlock,erosionBlock,fishSamplingBlock, blockageBlock,
-            culvertDiameter2Block, culvertDiameter3Block, fishReasonBlock, clientBlock ;
+            culvertDiameter2Block, culvertDiameter3Block, fishReasonBlock, clientBlock, scourBlock,
+            outletBlock;
 
     public ImageButton attachmentButton, cancelAttachmentButton;
     private boolean isLocationOK = false;
@@ -173,6 +174,7 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
     public void setTextViews() {
         latitudeView = (TextView)findViewById(R.id.latText);
         longitudeView = (TextView)findViewById(R.id.longText);
+        accuracyView = (TextView)findViewById(R.id.accuracyText);
         attachmentName = (TextView)findViewById(R.id.attachmentName);
 
         inspectionCrewView = (EditText)findViewById(R.id.crewText);
@@ -312,6 +314,8 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
         fishSamplingSpinner.setOnItemSelectedListener(this);
         blockageSpinner.setOnItemSelectedListener(this);
         fishPassageConcernsSpinner.setOnItemSelectedListener(this);
+        scourPoolPresentSpinner.setOnItemSelectedListener(this);
+        culvertOutletTypeSpinner.setOnItemSelectedListener(this);
     }
 
     public void setSpinnerAdapter(Spinner spinner, int arrayID){
@@ -365,6 +369,8 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
         culvertDiameter2Block = (LinearLayout)findViewById(R.id.culvertD2Layout);
         culvertDiameter3Block = (LinearLayout)findViewById(R.id.culvertD3Layout);
         fishReasonBlock = (LinearLayout)findViewById(R.id.fishReasonLayout);
+        scourBlock = (LinearLayout)findViewById(R.id.scourBlock);
+        outletBlock = (LinearLayout)findViewById(R.id.outletBlock);
 
         clientBlock = (LinearLayout)findViewById(R.id.clientLayout);
         setClientBlock(clientBlock);
@@ -963,7 +969,7 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         ViewToggler toggler = new ViewToggler(parent, position, culvertBlock, bridgeBlock,
                 erosionBlock, fishSamplingBlock, blockageBlock,culvertDiameter2Block,
-                culvertDiameter3Block,fishReasonBlock);
+                culvertDiameter3Block,fishReasonBlock, scourBlock, outletBlock);
         toggler.toggleView();
     }
 
@@ -1016,10 +1022,10 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
     @Override
     public void onLocationChanged(Location location) {
         float accuracy = location.getAccuracy();
-
+        accuracyView.setText("Accuracy: " + accuracy + " meters");
 //        Log.i("debug", ""+accuracy);
 
-        if(accuracy <= 10) {
+        if(accuracy <= 6) {
             latitudeView.setTextColor(Color.BLUE);
             longitudeView.setTextColor(Color.BLUE);
             latitudeView.setText("" + location.getLatitude());
@@ -1045,7 +1051,9 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        mGoogleApiClient.connect();
+        if(!isLocationOK) {
+            mGoogleApiClient.connect();
+        }
     }
 
     @Override

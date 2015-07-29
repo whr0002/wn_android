@@ -114,9 +114,18 @@
                     android:id="@+id/accessLabel"
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:textSize="18sp"
                     android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/red"
+                    android:textSize="18sp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.1"/>
 
                 <Spinner
                     android:layout_width="0dp"
@@ -380,15 +389,32 @@
                 android:weightSum="1"
                 >
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="10dp">
 
-                    android:textSize="18sp" android:textColor="@color/black" android:text="Longitude"
-                    android:id="@+id/longLabel"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Longitude"
+                        android:id="@+id/longLabel"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:layout_centerInParent="true"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/longLabel"
+                        android:id="@+id/accuracyText"
+                        android:text="Accuracy: "
+                        android:textSize="12sp"
+                        />
+
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="0dp"
@@ -587,35 +613,7 @@
 
             </LinearLayout>
 
-            <!-- First Riffle Distance -->
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:weightSum="1"
-                >
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp" android:textColor="@color/black"
-                    android:text="First Riffle Distance (m)"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"/>
-
-                <EditText android:textColor="@color/cblue"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/firstRiffleDistanceText"
-                    android:layout_weight="0.5"
-                    android:singleLine="true"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:layout_gravity="center"/>
-
-            </LinearLayout>
 
 
             <!-- Crossing Type -->
@@ -681,7 +679,16 @@
                         android:id="@+id/culvertLengthLabel"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.5"/>
+                        android:layout_weight="0.4"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"/>
 
                     <EditText android:textColor="@color/cblue"
                         android:layout_width="0dp"
@@ -815,7 +822,16 @@
                         android:id="@+id/culvertSubstrateLabel"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.5"/>
+                        android:layout_weight="0.4"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"/>
 
                     <Spinner
                         android:layout_width="0dp"
@@ -832,7 +848,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:id="@+id/substrateBlock">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -871,11 +888,20 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="4"
+                            android:layout_weight="3"
                             android:text="Primary"
                             android:textSize="18sp" android:textColor="@color/black"
-                            android:gravity="center"
+                            android:gravity="center_vertical|right"
+
                             />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text=" *"
+                            android:textColor="@color/red"
+                            android:textSize="18sp"
+                            android:layout_gravity="right"
+                            android:layout_weight="1"/>
 
                         <Spinner
                             android:layout_width="0dp"
@@ -902,11 +928,16 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="4"
+                            android:layout_weight="3"
                             android:text="Secondary"
                             android:textSize="18sp" android:textColor="@color/black"
-                            android:gravity="center"
+                            android:gravity="center_vertical|right"
                             />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"></View>
 
                         <Spinner
                             android:layout_width="0dp"
@@ -933,11 +964,15 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="4"
+                            android:layout_weight="3"
                             android:text="Tertiary"
                             android:textSize="18sp" android:textColor="@color/black"
-                            android:gravity="center"
+                            android:gravity="center_vertical|right"
                             />
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"></View>
 
                         <Spinner
                             android:layout_width="0dp"
@@ -1033,7 +1068,16 @@
                         android:text="Road Fill Above Culvert (m)"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.5"/>
+                        android:layout_weight="0.4"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"/>
 
                     <EditText android:textColor="@color/cblue"
                         android:layout_width="0dp"
@@ -1064,7 +1108,16 @@
                         android:id="@+id/culvertOutletTypeLabel"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.5"/>
+                        android:layout_weight="0.4"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"/>
 
                     <Spinner
                         android:layout_width="0dp"
@@ -1073,6 +1126,59 @@
 
                         android:layout_weight="0.5"
                         android:layout_gravity="center"/>
+
+
+                </LinearLayout>
+
+                <!-- Outlet Type Block -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/outletBlock"
+                    android:orientation="vertical"
+                    android:background="@color/yellow"
+                    android:visibility="gone"
+                    >
+
+                    <!-- Culvert Outlet Gap -->
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:weightSum="1"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+
+                            android:textSize="18sp" android:textColor="@color/black" android:text="Culvert Outlet Gap(cm)"
+                            android:id="@+id/culvertOutletGapLabel"
+                            android:layout_marginLeft="10dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.4"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="*"
+                            android:textColor="@color/red"
+                            android:textSize="18sp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.1"/>
+
+                        <EditText android:textColor="@color/cblue"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/culvertOutletGapText"
+                            android:layout_weight="0.5"
+                            android:singleLine="true"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
 
 
                 </LinearLayout>
@@ -1093,7 +1199,16 @@
                         android:id="@+id/scourPoolPresentLabel"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.5"/>
+                        android:layout_weight="0.4"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"/>
 
                     <Spinner
                         android:layout_width="0dp"
@@ -1105,66 +1220,100 @@
 
 
                 </LinearLayout>
-                <!-- Culvert Pool Depth -->
+
+                <!-- Scour Pool block -->
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:weightSum="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/scourBlock"
+                    android:orientation="vertical"
+                    android:background="@color/yellow"
+                    android:visibility="gone"
                     >
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-
-                        android:textSize="18sp" android:textColor="@color/black" android:text="Culvert Pool Depth(cm)"
-                        android:id="@+id/culvertPoolDepthLabel"
-                        android:layout_marginLeft="10dp"
+                    <!-- Culvert Pool Depth -->
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.5"/>
+                        android:weightSum="1"
+                        >
 
-                    <EditText android:textColor="@color/cblue"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/culvertPoolDepthText"
-                        android:layout_weight="0.5"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
-                        android:inputType="numberDecimal"
-                        android:layout_gravity="center"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+
+                            android:textSize="18sp" android:textColor="@color/black" android:text="Culvert Pool Depth(cm)"
+                            android:id="@+id/culvertPoolDepthLabel"
+                            android:layout_marginLeft="10dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.4"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="*"
+                            android:textColor="@color/red"
+                            android:textSize="18sp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.1"/>
+
+                        <EditText android:textColor="@color/cblue"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/culvertPoolDepthText"
+                            android:layout_weight="0.5"
+                            android:singleLine="true"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <!-- First Riffle Distance -->
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:weightSum="1"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp" android:textColor="@color/black"
+                            android:text="First Riffle Distance (m)"
+                            android:layout_marginLeft="10dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.4"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="*"
+                            android:textColor="@color/red"
+                            android:textSize="18sp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.1"/>
+
+                        <EditText android:textColor="@color/cblue"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/firstRiffleDistanceText"
+                            android:layout_weight="0.5"
+                            android:singleLine="true"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
-                <!-- Culvert Outlet Gap -->
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:weightSum="1"
-                    >
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
 
-                        android:textSize="18sp" android:textColor="@color/black" android:text="Culvert Outlet Gap(cm)"
-                        android:id="@+id/culvertOutletGapLabel"
-                        android:layout_marginLeft="10dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.5"/>
 
-                    <EditText android:textColor="@color/cblue"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/culvertOutletGapText"
-                        android:layout_weight="0.5"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
-                        android:inputType="numberDecimal"
-                        android:layout_gravity="center"/>
-
-                </LinearLayout>
                 <!-- Delineator -->
                 <LinearLayout
                     android:orientation="horizontal"
@@ -1182,7 +1331,16 @@
                         android:id="@+id/delineatorLabel"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.5"/>
+                        android:layout_weight="0.4"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"/>
 
                     <Spinner
                         android:layout_width="0dp"
@@ -1862,7 +2020,16 @@
                         android:id="@+id/erosionSourceLabel"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.5"/>
+                        android:layout_weight="0.4"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"/>
 
                     <Spinner
                         android:layout_width="0dp"
@@ -2135,7 +2302,16 @@
                     android:id="@+id/fishPassageConcernsReasonLabel"
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center"
-                    android:layout_weight="0.5"/>
+                    android:layout_weight="0.4"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/red"
+                    android:textSize="18sp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.1"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -2231,7 +2407,16 @@
                         android:id="@+id/blockageMaterialLabel"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.5"/>
+                        android:layout_weight="0.4"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"/>
 
                     <EditText android:textColor="@color/cblue"
                         android:layout_width="0dp"
@@ -2261,7 +2446,16 @@
                         android:id="@+id/blockageCauseLabel"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.5"/>
+                        android:layout_weight="0.4"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"/>
 
                     <EditText android:textColor="@color/cblue"
                         android:layout_width="0dp"
@@ -2369,7 +2563,16 @@
                     android:id="@+id/sedimentationLabel"
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center"
-                    android:layout_weight="0.5"/>
+                    android:layout_weight="0.4"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/red"
+                    android:textSize="18sp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.1"/>
 
                 <Spinner
                     android:layout_width="0dp"
