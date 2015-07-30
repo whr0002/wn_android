@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    >
 
     <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
     <LinearLayout
@@ -377,7 +378,7 @@
                     android:textSize="18sp"
                     android:text="0.000000"
                     android:layout_gravity="center"
-                    android:textColor="@color/cblue" />
+                    android:textColor="@color/red" />
 
             </LinearLayout>
             <!-- Longitude -->
@@ -421,7 +422,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/longText"
                     android:layout_weight="0.5"
-                    android:textColor="@color/cblue"
+                    android:textColor="@color/red"
                     android:textSize="18sp"
                     android:text="0.000000"
                     android:layout_gravity="center"
@@ -844,12 +845,15 @@
 
                 </LinearLayout>
 
+                <!-- Culvert Substrate Block -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_gravity="center"
-                    android:id="@+id/substrateBlock">
+                    android:id="@+id/substrateBlock"
+                    android:background="@color/yellow"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -38,7 +38,8 @@ public class EditFormActivity extends FormActivity{
         setImageViews();
         setImageButtons();
 
-
+        latitudeView.setTextColor(this.getResources().getColor(R.color.cblue));
+        longitudeView.setTextColor(this.getResources().getColor(R.color.cblue));
     }
 
     @Override

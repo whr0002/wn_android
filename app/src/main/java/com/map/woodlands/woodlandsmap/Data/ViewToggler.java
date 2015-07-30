@@ -24,6 +24,7 @@ public class ViewToggler {
     private LinearLayout fishReasonBlock;
     private LinearLayout scourBlock;
     private LinearLayout outletBlock;
+    private LinearLayout substrateBlock;
 
     private View loadingView;
 
@@ -41,6 +42,7 @@ public class ViewToggler {
             this.fishReasonBlock = blocks[7];
             this.scourBlock = blocks[8];
             this.outletBlock = blocks[9];
+            this.substrateBlock = blocks[10];
 
         }
     }
@@ -131,6 +133,13 @@ public class ViewToggler {
                     outletBlock.setVisibility(View.GONE);
                 }
                 break;
+
+            case R.id.culvertSubstrateDropdown:
+                if(s.equals("yes") || s.equals("potential")){
+                    substrateBlock.setVisibility(View.VISIBLE);
+                }else{
+                    substrateBlock.setVisibility(View.GONE);
+                }
         }
     }
 

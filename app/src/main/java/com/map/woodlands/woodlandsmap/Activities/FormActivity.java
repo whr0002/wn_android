@@ -117,7 +117,7 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
 
     public LinearLayout culvertBlock,bridgeBlock,erosionBlock,fishSamplingBlock, blockageBlock,
             culvertDiameter2Block, culvertDiameter3Block, fishReasonBlock, clientBlock, scourBlock,
-            outletBlock;
+            outletBlock, substrateBlock;
 
     public ImageButton attachmentButton, cancelAttachmentButton;
     private boolean isLocationOK = false;
@@ -316,6 +316,7 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
         fishPassageConcernsSpinner.setOnItemSelectedListener(this);
         scourPoolPresentSpinner.setOnItemSelectedListener(this);
         culvertOutletTypeSpinner.setOnItemSelectedListener(this);
+        culvertSubstrateSpinner.setOnItemSelectedListener(this);
     }
 
     public void setSpinnerAdapter(Spinner spinner, int arrayID){
@@ -371,6 +372,7 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
         fishReasonBlock = (LinearLayout)findViewById(R.id.fishReasonLayout);
         scourBlock = (LinearLayout)findViewById(R.id.scourBlock);
         outletBlock = (LinearLayout)findViewById(R.id.outletBlock);
+        substrateBlock = (LinearLayout)findViewById(R.id.substrateBlock);
 
         clientBlock = (LinearLayout)findViewById(R.id.clientLayout);
         setClientBlock(clientBlock);
@@ -969,7 +971,7 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         ViewToggler toggler = new ViewToggler(parent, position, culvertBlock, bridgeBlock,
                 erosionBlock, fishSamplingBlock, blockageBlock,culvertDiameter2Block,
-                culvertDiameter3Block,fishReasonBlock, scourBlock, outletBlock);
+                culvertDiameter3Block,fishReasonBlock, scourBlock, outletBlock,substrateBlock);
         toggler.toggleView();
     }
 

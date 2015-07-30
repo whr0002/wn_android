@@ -82,152 +82,165 @@ public class FormValidator {
             if(mForm.CROSS_TYPE.length() == 0){
                 messages.add("Crossing Type is required");
             }else{
+                // Crossing type is not bridge
                 if(!mForm.CROSS_TYPE.toLowerCase().contains("bridge")){
 
+                    // Culvert Length
                     if(mForm.CULV_LEN.length() == 0){
                         messages.add("Culvert Length is required");
+                    }else{
+                        if(mForm.CULV_LEN.length()> 0 && !isNumeric(mForm.CULV_LEN)){
+                            messages.add(generateNumericMessage("Culvert Length"));
+                        }
+
+                        s = generateRangeMessage("Culvert Length", mForm.CULV_LEN, 0, 100);
+                        if(s != null){
+                            messages.add(s);
+                        }
                     }
 
-                    // It's culvert type, make Culvert Diameter 1 required
+                    // Culvert Diameter 1
                     if(mForm.CULV_DIA_1.length() == 0){
                         messages.add("Culvert Diameter 1 is required");
                     }
 
+                    if(mForm.CULV_DIA_1.length()> 0 && !isNumeric(mForm.CULV_DIA_1)){
+                        messages.add(generateNumericMessage("Culvert Diameter 1-Primary"));
+                    }
+
+                    if(mForm.CULV_DIA_2.length()> 0 && !isNumeric(mForm.CULV_DIA_2)){
+                        messages.add(generateNumericMessage("Culvert Diameter 2-Secondary"));
+                    }
+
+                    if(mForm.CULV_DIA_3.length()> 0 && !isNumeric(mForm.CULV_DIA_3)){
+                        messages.add(generateNumericMessage("Culvert Diameter 3-Tertiary"));
+                    }
+
+                    s = generateRangeMessage("Culvert Diameter 1-Primary", mForm.CULV_DIA_1, 0, 5000);
+                    if(s != null){
+                        messages.add(s);
+                    }
+
+                    s = generateRangeMessage("Culvert Diameter 2-Secondary", mForm.CULV_DIA_2, 0, 5000);
+                    if(s != null){
+                        messages.add(s);
+                    }
+
+                    s = generateRangeMessage("Culvert Diameter 3-Tertiary", mForm.CULV_DIA_3, 0, 5000);
+                    if(s != null){
+                        messages.add(s);
+                    }
+
+                    // Culvert Substrate
                     if(mForm.CULV_SUBS.length() == 0){
                         messages.add("Culvert Substrate is required");
+                    }else if(mForm.CULV_SUBS.equals("Yes") || mForm.CULV_SUBS.equals("Potential")){
+                        if(mForm.CULV_SUBSTYPE1.length() == 0 || mForm.CULV_SUBSPROPORTION1.length() == 0){
+                            messages.add("Substrate Primary is required");
+                        }
                     }
 
-                    if(mForm.CULV_SUBSTYPE1.length() == 0 || mForm.CULV_SUBSPROPORTION1.length() == 0){
-                        messages.add("Substrate Primary is required");
-                    }
 
+
+                    // Road Fill Above Culvert
                     if(mForm.RoadFillAboveCulvert.length() == 0){
                         messages.add("Road Fill above Culvert is required");
                     }
 
+                    // Outlet Type
+                    if(mForm.CULV_OUTLETTYPE.length() == 0){
+                        messages.add("Culvert Outlet Type is required");
+                    }else if(mForm.CULV_OUTLETTYPE.equals("Hanging")){
+                        if(mForm.CULV_OPGAP.length() == 0){
+                            messages.add("Culvert Outlet Gap is required");
+                        }else{
+                            if(mForm.CULV_OPGAP.length()> 0 && !isNumeric(mForm.CULV_OPGAP)){
+                                messages.add(generateNumericMessage("Culvert Outlet Gap"));
+                            }
+
+                            s = generateRangeMessage("Culvert Outlet Gap", mForm.CULV_OPGAP, 0, 1000);
+                            if(s != null){
+                                messages.add(s);
+                            }
+                        }
+                    }
+
+                    // Scour Pool Present
+                    if(mForm.SCOUR_POOL.length() == 0){
+                        messages.add("Scour Pool Present is required");
+                    }else{
+                        if(mForm.SCOUR_POOL.equals("Yes")){
+
+                            if(mForm.CULV_OPOOD.length() == 0){
+                                messages.add("Culvert Pool Depth is required");
+                            }else{
+                                if(mForm.CULV_OPOOD.length()> 0 && !isNumeric(mForm.CULV_OPOOD)){
+                                    messages.add(generateNumericMessage("Culvert Pool Depth"));
+                                }
+                                s = generateRangeMessage("Culvert Pool Depth", mForm.CULV_OPOOD, 0, 1000);
+                                if(s != null){
+                                    messages.add(s);
+                                }
+                            }
+
+                            if(mForm.FirstRiffleDistance.length() == 0){
+                                messages.add("First Riffle Distance is required");
+                            }
+                        }
+                    }
+
+                    // Delineator
+                    if(mForm.DELINEATOR.length() == 0){
+                        messages.add("Delineator is required");
+                    }
+
+                }else{
+                    // Crossing Type is bridge
+                    if(mForm.BRDG_LEN.length()> 0 && !isNumeric(mForm.BRDG_LEN)){
+                        messages.add(generateNumericMessage("Bridge Length"));
+                    }
+                    s = generateRangeMessage("Bridge Length", mForm.BRDG_LEN, 0, 100);
+                    if(s != null){
+                        messages.add(s);
+                    }
                 }
             }
 
+            // Erosion
             if(mForm.EROSION.length() == 0){
                 messages.add("Erosion is required");
             }else{
 
-                if(mForm.EROSION.equals("Yes")){
-                    if(mForm.EROSION_SO.length() == 0){
-                        messages.add("Erosion Source is required");
-                    }
-                }
+                // Erosion is Yes or Pot, validate Erosion Type and Degree
+                if(mForm.EROSION.equals("Yes") || mForm.EROSION.equals("Potential")){
 
-                if(!mForm.EROSION.contains("No")){
-                    // Erosion is Yes or Pot, validate Erosion Type and Degree
+
+                    // Erosion Type
                     if(mForm.EROSION_TY1.length() == 0){
                         messages.add("Erosion Type is required");
                     }
 
+                    // Erosion Source
+                    if(mForm.EROSION_SO.length() == 0){
+                        messages.add("Erosion Source is required");
+                    }
+
+                    // Erosion Extent
                     if(mForm.EROSION_DE.length() == 0){
                         messages.add("Erosion Extent is required");
                     }
-                }
-            }
 
-            if(mForm.EROSION_AR.length()> 0 && !isNumeric(mForm.EROSION_AR)){
-                messages.add(generateNumericMessage("Erosion Area"));
-            }
-
-            s = generateRangeMessage("Erosion Area", mForm.EROSION_AR, 0, 1000);
-            if(s != null){
-                messages.add(s);
-            }
-
-
-            if(mForm.CULV_LEN.length()> 0 && !isNumeric(mForm.CULV_LEN)){
-                messages.add(generateNumericMessage("Culvert Length"));
-            }
-
-            s = generateRangeMessage("Culvert Length", mForm.CULV_LEN, 0, 100);
-            if(s != null){
-                messages.add(s);
-            }
-
-            if(mForm.CULV_DIA_1.length()> 0 && !isNumeric(mForm.CULV_DIA_1)){
-                messages.add(generateNumericMessage("Culvert Diameter 1-Primary"));
-            }
-
-            if(mForm.CULV_DIA_2.length()> 0 && !isNumeric(mForm.CULV_DIA_2)){
-                messages.add(generateNumericMessage("Culvert Diameter 2-Secondary"));
-            }
-
-            if(mForm.CULV_DIA_3.length()> 0 && !isNumeric(mForm.CULV_DIA_3)){
-                messages.add(generateNumericMessage("Culvert Diameter 3-Tertiary"));
-            }
-
-            s = generateRangeMessage("Culvert Diameter 1-Primary", mForm.CULV_DIA_1, 0, 5000);
-            if(s != null){
-                messages.add(s);
-            }
-
-            s = generateRangeMessage("Culvert Diameter 2-Secondary", mForm.CULV_DIA_2, 0, 5000);
-            if(s != null){
-                messages.add(s);
-            }
-
-            s = generateRangeMessage("Culvert Diameter 3-Tertiary", mForm.CULV_DIA_3, 0, 5000);
-            if(s != null){
-                messages.add(s);
-            }
-
-            if(mForm.SCOUR_POOL.length() == 0){
-                messages.add("Scour Pool Present is required");
-            }else{
-                if(mForm.SCOUR_POOL.equals("Yes")){
-
-
-
-
-                    if(mForm.CULV_OPOOD.length() == 0){
-                        messages.add("Culvert Pool Depth is required");
-                    }else{
-                        if(mForm.CULV_OPOOD.length()> 0 && !isNumeric(mForm.CULV_OPOOD)){
-                            messages.add(generateNumericMessage("Culvert Pool Depth"));
-                        }
-                        s = generateRangeMessage("Culvert Pool Depth", mForm.CULV_OPOOD, 0, 1000);
-                        if(s != null){
-                            messages.add(s);
-                        }
+                    // Erosion Area
+                    if(mForm.EROSION_AR.length()> 0 && !isNumeric(mForm.EROSION_AR)){
+                        messages.add(generateNumericMessage("Erosion Area"));
                     }
-
-                    if(mForm.FirstRiffleDistance.length() == 0){
-                        messages.add("First Riffle Distance is required");
+                    s = generateRangeMessage("Erosion Area", mForm.EROSION_AR, 0, 1000);
+                    if(s != null){
+                        messages.add(s);
                     }
                 }
-
-                if(mForm.CULV_OUTLETTYPE.length() == 0){
-                    messages.add("Culvert Outlet Type is required");
-                }else if(mForm.CULV_OUTLETTYPE.equals("Hanging")){
-                    if(mForm.CULV_OPGAP.length() == 0){
-                        messages.add("Culvert Outlet Gap is required");
-                    }else{
-                        if(mForm.CULV_OPGAP.length()> 0 && !isNumeric(mForm.CULV_OPGAP)){
-                            messages.add(generateNumericMessage("Culvert Outlet Gap"));
-                        }
-
-                        s = generateRangeMessage("Culvert Outlet Gap", mForm.CULV_OPGAP, 0, 1000);
-                        if(s != null){
-                            messages.add(s);
-                        }
-                    }
-                }
-
-
             }
 
-            if(mForm.BRDG_LEN.length()> 0 && !isNumeric(mForm.BRDG_LEN)){
-                messages.add(generateNumericMessage("Bridge Length"));
-            }
-            s = generateRangeMessage("Bridge Length", mForm.BRDG_LEN, 0, 100);
-            if(s != null){
-                messages.add(s);
-            }
 
             if(mForm.FISH_PCONC.length() == 0){
                 messages.add("Fish Passage Concerns is required");
@@ -282,9 +295,7 @@ public class FormValidator {
                 messages.add("Sedimentation is required");
             }
 
-            if(mForm.DELINEATOR.length() == 0){
-                messages.add("Delineator is required");
-            }
+
 
 
 

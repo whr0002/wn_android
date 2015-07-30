@@ -128,9 +128,8 @@ public class FormFragment  extends Fragment{
 //                ProgressDialog progressDialog = ProgressDialog.show(aba, "", "Loading ...", true);
                 // Create a new form, go to form detail activity
                 Intent intent = new Intent(aba, FormActivity.class);
-//                startActivity(intent);
-                Bundle bundle = new Bundle();
                 startActivityForResult(intent, 0);
+
 
                 return true;
 
