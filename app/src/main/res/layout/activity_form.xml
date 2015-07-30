@@ -468,151 +468,165 @@
 
 
             </LinearLayout>
-            <!-- Steam Width -->
+
+            <!-- Stream Block -->
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:weightSum="1"
-                >
+                android:layout_height="wrap_content"
+                android:id="@+id/streamBlock"
+                android:orientation="vertical"
+                android:background="@color/lightBlue"
+                android:visibility="gone">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-
-                    android:textSize="18sp" android:textColor="@color/black" android:text="Bankfull Width(m)"
-                    android:id="@+id/streamWidthLabel"
-                    android:layout_marginLeft="10dp"
+                <!-- Steam Width -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:layout_weight="0.5"/>
+                    android:weightSum="1"
+                    >
 
-                <EditText android:textColor="@color/cblue"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/streamWidthText"
-                    android:layout_weight="0.5"
-                    android:singleLine="true"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:layout_gravity="center"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+
+                        android:textSize="18sp" android:textColor="@color/black" android:text="Bankfull Width(m)"
+                        android:id="@+id/streamWidthLabel"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.5"/>
+
+                    <EditText android:textColor="@color/cblue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/streamWidthText"
+                        android:layout_weight="0.5"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
+                <!-- Stream Width measured -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:weightSum="1"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+
+                        android:textSize="18sp" android:textColor="@color/black" android:text="Bankfull Width measured?"
+                        android:id="@+id/streamMeasuredLabel"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.5"/>
+
+                    <Spinner
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/streamMeasuredDropdown"
+
+                        android:layout_weight="0.5"
+                        android:layout_gravity="center"/>
+
+
+                </LinearLayout>
+
+                <!-- Channel Creek Depth -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:weightSum="1"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" android:textColor="@color/black"
+                        android:text="Channel Creek Depth Left (cm)"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.5"/>
+
+                    <EditText android:textColor="@color/cblue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/channelCreekDepthLeftText"
+                        android:layout_weight="0.5"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:weightSum="1"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" android:textColor="@color/black"
+                        android:text="Channel Creek Depth Right (cm)"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.5"/>
+
+                    <EditText android:textColor="@color/cblue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/channelCreekDepthRightText"
+                        android:layout_weight="0.5"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:weightSum="1"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" android:textColor="@color/black"
+                        android:text="Channel Creek Depth Center (cm)"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.5"/>
+
+                    <EditText android:textColor="@color/cblue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/channelCreekDepthCenterText"
+                        android:layout_weight="0.5"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
 
             </LinearLayout>
-            <!-- Stream Width measured -->
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:weightSum="1"
-                >
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-
-                    android:textSize="18sp" android:textColor="@color/black" android:text="Bankfull Width measured?"
-                    android:id="@+id/streamMeasuredLabel"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"/>
-
-                <Spinner
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:id="@+id/streamMeasuredDropdown"
-
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"/>
 
 
-            </LinearLayout>
-
-            <!-- Channel Creek Depth -->
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:weightSum="1"
-                >
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp" android:textColor="@color/black"
-                    android:text="Channel Creek Depth Left (cm)"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"/>
-
-                <EditText android:textColor="@color/cblue"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/channelCreekDepthLeftText"
-                    android:layout_weight="0.5"
-                    android:singleLine="true"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:layout_gravity="center"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:weightSum="1"
-                >
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp" android:textColor="@color/black"
-                    android:text="Channel Creek Depth Right (cm)"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"/>
-
-                <EditText android:textColor="@color/cblue"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/channelCreekDepthRightText"
-                    android:layout_weight="0.5"
-                    android:singleLine="true"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:layout_gravity="center"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:weightSum="1"
-                >
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp" android:textColor="@color/black"
-                    android:text="Channel Creek Depth Center (cm)"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"/>
-
-                <EditText android:textColor="@color/cblue"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/channelCreekDepthCenterText"
-                    android:layout_weight="0.5"
-                    android:singleLine="true"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:layout_gravity="center"/>
-
-            </LinearLayout>
 
 
 
@@ -1013,7 +1027,16 @@
                         android:id="@+id/culvertBWProportionLabel"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.5"/>
+                        android:layout_weight="0.4"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"/>
 
                     <Spinner
                         android:layout_width="0dp"
@@ -1042,7 +1065,16 @@
                         android:id="@+id/culvertSlopeLabel"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.5"/>
+                        android:layout_weight="0.4"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"/>
 
                     <Spinner
                         android:layout_width="0dp"

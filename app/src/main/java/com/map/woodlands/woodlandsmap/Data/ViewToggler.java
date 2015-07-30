@@ -25,6 +25,7 @@ public class ViewToggler {
     private LinearLayout scourBlock;
     private LinearLayout outletBlock;
     private LinearLayout substrateBlock;
+    private LinearLayout streamBlock;
 
     private View loadingView;
 
@@ -43,7 +44,7 @@ public class ViewToggler {
             this.scourBlock = blocks[8];
             this.outletBlock = blocks[9];
             this.substrateBlock = blocks[10];
-
+            this.streamBlock = blocks[11];
         }
     }
 
@@ -140,6 +141,16 @@ public class ViewToggler {
                 }else{
                     substrateBlock.setVisibility(View.GONE);
                 }
+                break;
+
+            case R.id.streamClassDropdown:
+                if(s.length() == 0 || s.contains("ephemeral")){
+                    streamBlock.setVisibility(View.GONE);
+                }else{
+                    streamBlock.setVisibility(View.VISIBLE);
+                }
+
+                break;
         }
     }
 

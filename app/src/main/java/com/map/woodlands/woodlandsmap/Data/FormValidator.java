@@ -99,6 +99,16 @@ public class FormValidator {
                         }
                     }
 
+                    // Culvert Back Water Proportion
+                    if(mForm.CULV_BACKWATERPROPORTION.length() == 0){
+                        messages.add("Culvert Back Water Proportion is required");
+                    }
+
+                    // Culvert Slope
+                    if(mForm.CULV_SLOPE.length() == 0){
+                        messages.add("Culvert Slope is required");
+                    }
+
                     // Culvert Diameter 1
                     if(mForm.CULV_DIA_1.length() == 0){
                         messages.add("Culvert Diameter 1 is required");

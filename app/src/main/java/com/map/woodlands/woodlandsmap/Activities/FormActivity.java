@@ -117,7 +117,7 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
 
     public LinearLayout culvertBlock,bridgeBlock,erosionBlock,fishSamplingBlock, blockageBlock,
             culvertDiameter2Block, culvertDiameter3Block, fishReasonBlock, clientBlock, scourBlock,
-            outletBlock, substrateBlock;
+            outletBlock, substrateBlock, streamBlock;
 
     public ImageButton attachmentButton, cancelAttachmentButton;
     private boolean isLocationOK = false;
@@ -317,6 +317,7 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
         scourPoolPresentSpinner.setOnItemSelectedListener(this);
         culvertOutletTypeSpinner.setOnItemSelectedListener(this);
         culvertSubstrateSpinner.setOnItemSelectedListener(this);
+        streamClassificationSpinner.setOnItemSelectedListener(this);
     }
 
     public void setSpinnerAdapter(Spinner spinner, int arrayID){
@@ -373,6 +374,7 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
         scourBlock = (LinearLayout)findViewById(R.id.scourBlock);
         outletBlock = (LinearLayout)findViewById(R.id.outletBlock);
         substrateBlock = (LinearLayout)findViewById(R.id.substrateBlock);
+        streamBlock = (LinearLayout)findViewById(R.id.streamBlock);
 
         clientBlock = (LinearLayout)findViewById(R.id.clientLayout);
         setClientBlock(clientBlock);
@@ -971,7 +973,7 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         ViewToggler toggler = new ViewToggler(parent, position, culvertBlock, bridgeBlock,
                 erosionBlock, fishSamplingBlock, blockageBlock,culvertDiameter2Block,
-                culvertDiameter3Block,fishReasonBlock, scourBlock, outletBlock,substrateBlock);
+                culvertDiameter3Block,fishReasonBlock, scourBlock, outletBlock,substrateBlock, streamBlock);
         toggler.toggleView();
     }
 
