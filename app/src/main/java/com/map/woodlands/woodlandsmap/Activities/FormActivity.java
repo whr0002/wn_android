@@ -15,7 +15,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,6 +41,7 @@ import com.map.woodlands.woodlandsmap.Data.DirectoryChooserDialog;
 import com.map.woodlands.woodlandsmap.Data.Form;
 import com.map.woodlands.woodlandsmap.Data.FormController;
 import com.map.woodlands.woodlandsmap.Data.FormValidator;
+import com.map.woodlands.woodlandsmap.Data.GPSChcker;
 import com.map.woodlands.woodlandsmap.Data.ImageProcessor;
 import com.map.woodlands.woodlandsmap.Data.MyApplication;
 import com.map.woodlands.woodlandsmap.Data.UserInfo;
@@ -122,6 +122,7 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
     public ImageButton attachmentButton, cancelAttachmentButton;
     private boolean isLocationOK = false;
     private boolean isShowLocationWarning = true;
+    private boolean isShowLocationRecord = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +144,9 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
+
+        // check GPS
+        new GPSChcker(this).check();
 
     }
 
@@ -490,8 +494,13 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.save:
                 // Save form
                 if(!isLocationOK && isShowLocationWarning){
-                    showAccuracyMessage();
+                    showMessage("The accuracy of your current location is low.");
                     isShowLocationWarning = false;
+                }else if((Double.parseDouble(latitudeView.getText().toString()) == 0 ||
+                        Double.parseDouble(longitudeView.getText().toString()) == 0) &&
+                        isShowLocationRecord){
+                    showMessage("No location information.  Please record GPS location by other devices");
+                    isShowLocationRecord = false;
                 }else {
 
                     Form form = generateForm();
@@ -958,7 +967,7 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
                 }
 
                 // Add/Update new photo
-                Log.i("debug", me.getValue());
+//                Log.i("debug", me.getValue());
                 File temp2 = new File(me.getValue());
                 if(temp2.exists()) {
                     mPhotoMap.put(me.getKey(), me.getValue());
@@ -1029,7 +1038,7 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
         accuracyView.setText("Accuracy: " + accuracy + " meters");
 //        Log.i("debug", ""+accuracy);
 
-        if(accuracy <= 6) {
+        if(accuracy <= 10) {
             latitudeView.setTextColor(Color.BLUE);
             longitudeView.setTextColor(Color.BLUE);
             latitudeView.setText("" + location.getLatitude());
@@ -1091,10 +1100,10 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
 //        }
     }
 
-    public void showAccuracyMessage(){
+    public void showMessage(String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Warning");
-        builder.setMessage("The accuracy of your current location is low.");
+        builder.setMessage(message);
 
 
         builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {

@@ -259,11 +259,13 @@ public class FormValidator {
                 if(mForm.FISH_PCONCREASON.length() == 0) {
                     messages.add("Fish Passage Concerns Reason is required");
                 }
+
+                if(mForm.FISH_PCONCREASON.length() > 20){
+                    messages.add(generateLengthMessage("Fish Passage Concerns Reason", 20));
+                }
             }
 
-            if(mForm.FISH_PCONCREASON.length() > 20){
-                messages.add(generateLengthMessage("Fish Passage Concerns Reason", 20));
-            }
+
 
             if(mForm.BLOCKAGE.length() == 0){
                 messages.add("Blockage is required");

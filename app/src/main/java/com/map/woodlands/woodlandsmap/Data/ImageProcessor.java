@@ -40,17 +40,18 @@ public class ImageProcessor {
 
         BitmapFactory.decodeFile(mPath, bmOptions);
 
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
-        int scaleFactor = 5;
-        // Determine how much to scale down the image
-        if(targetW != 0 && targetH != 0) {
-            scaleFactor = Math.min(photoW / targetW, photoH / targetH);
-        }
+//        int photoW = bmOptions.outWidth;
+//        int photoH = bmOptions.outHeight;
+//        int scaleFactor = 4;
+//        // Determine how much to scale down the image
+//        if(targetW != 0 && targetH != 0) {
+//            scaleFactor = Math.min(photoW / targetW, photoH / targetH);
+//        }
 
         // Decode the image file into a Bitmap sized to fill the view
         bmOptions.inJustDecodeBounds = false;
-        bmOptions.inSampleSize = scaleFactor;
+//        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inSampleSize = calculateInSampleSize(bmOptions, targetW, targetH);
         bmOptions.inPurgeable = true;
 
 
@@ -95,6 +96,29 @@ public class ImageProcessor {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) > reqHeight
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
     }
 
     public boolean setGeoTag(String path, LatLng geoTag) {
