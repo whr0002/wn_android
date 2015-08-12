@@ -52,6 +52,8 @@ public class Uploader {
         this.mContext = context;
         this.user = getUserInfo();
         this.client = new AsyncHttpClient();
+        this.client.setConnectTimeout(20 * 1000);
+        this.client.setResponseTimeout(20 * 1000);
         this.executorService = Executors.newFixedThreadPool(10);
         this.client.setThreadPool(executorService);
 

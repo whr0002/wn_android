@@ -59,7 +59,7 @@ public class ImageProcessor {
         mImageView.setImageBitmap(bitmap);
         // Indicate whether to compress the image
         if(mIsCompress) {
-            bmOptions.inSampleSize = 4;
+            bmOptions.inSampleSize = 1;
             Bitmap b = BitmapFactory.decodeFile(mPath, bmOptions);
             compressImage(b);
             setGeoTag(mPath, mLatLng);
@@ -88,7 +88,7 @@ public class ImageProcessor {
 
                 fos = new FileOutputStream(file);
                 if (fos != null) {
-                    b.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                    b.compress(Bitmap.CompressFormat.JPEG, 60, fos);
                     fos.close();
                 }
             }

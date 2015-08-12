@@ -60,6 +60,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by Jimmy on 3/11/2015.
@@ -884,7 +885,6 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
     public void dispatchTakePictureIntent(int requestCode){
         mCurrentRequestCode = requestCode;
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
         if(takePictureIntent.resolveActivity(getPackageManager()) != null){
             File photoFile = null;
             try{
@@ -908,8 +908,9 @@ public class FormActivity extends ActionBarActivity implements View.OnClickListe
 
     public File createImageFile() throws IOException{
         // Create an image file name
+        Random random = new Random();
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_"+timeStamp;
+        String imageFileName = timeStamp+"_"+random.nextInt(1000);
         File dir = new File(this.getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "picupload");
 
         if(!dir.exists()){
