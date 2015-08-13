@@ -88,7 +88,7 @@ public class ImageProcessor {
 
                 fos = new FileOutputStream(file);
                 if (fos != null) {
-                    b.compress(Bitmap.CompressFormat.JPEG, 60, fos);
+                    b.compress(Bitmap.CompressFormat.JPEG, 80, fos);
                     fos.close();
                 }
             }
